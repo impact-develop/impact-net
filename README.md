@@ -1,1 +1,1 @@
-# impact-vpn
+# impact-tunnel
