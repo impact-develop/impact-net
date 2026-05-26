@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMPACT NET // Official Project</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --card-color: #1f2833;
+            --text-main: #000000;
+            --text-secondary: #c5a059;
+            --btn-color: #cfcfcf;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px 10px 20px;
+            box-sizing: border-box;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .nav-box {
+            border: 1px solid #333;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #888;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .content {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .block {
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .card {
+            background-color: var(--card-color);
+            border-radius: 24px;
+            border: 1px solid #2c3540;
+            height: 140px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255,255,255,0.05);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .block-caption {
+            margin-top: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .download-zone {
+            margin: 20px 0 60px 0;
+            text-align: center;
+        }
+
+          .btn-download {
+            display: inline-block;
+            background-color: var(--btn-color);
+            color: #000000;
+            padding: 16px 50px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            
+            /* Тень в обычном состоянии (мягкая цветная) */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+            
+            transition: all 0.2s;
+        }
+
+        .btn-download:hover {
+            transform: scale(1.03);
+           
+            /* МОЩНЫЙ ГЛОУ ПРИ НАВЕДЕНИИ (сделай цвет под стиль сайта) */
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+        footer {
+            margin-bottom: 30px;
+            font-size: 0.8rem;
+            color: #444;
+            text-align: center;
+        }
+
+        footer a {
+            color: #666;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer a:hover { color: #aaa; }
+
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.92); 
+            backdrop-filter: blur(5px); 
+            justify-content: center; 
+            align-items: flex-start; 
+            padding: 40px 20px; 
+            box-sizing: border-box; 
+            z-index: 999;
+            overflow-y: auto; 
+        }
+        
+        .modal-content { 
+            background: #14141c; 
+            border: 1px solid #222; 
+            padding: 30px; 
+            border-radius: 16px; 
+            max-width: 550px; 
+            text-align: left; 
+            margin: auto; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        
+        .modal-content h2 { 
+            margin-top: 0; 
+            color: #fff; 
+            font-size: 1.4rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-content p { 
+            font-size: 0.95rem; 
+            line-height: 1.5;
+            color: #aaa;
+            margin-bottom: 18px; 
+        }
+
+        .close-btn { 
+            background: #ffffff; 
+            color: #000000; 
+            border: none; 
+            padding: 14px 40px; 
+            font-size: 1rem;
+            font-weight: bold; 
+            width: auto; 
+            border-radius: 50px; 
+            display: block;
+            margin: 30px auto 0 auto; 
+            cursor: pointer; 
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+        }
+
+        .close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.25);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <img src="impactvpn.png" class="logo-img">
+            <div class="logo-text">IMPACT</div>
+        </div>
+        <div class="nav-box">тут всякие странички</div>
+    </header>
+
+    <main class="content">
+        <div class="block">
+            <div class="card">
+
+
+                 <img src="molniyaimpact.jpg" alt="Картинка 1" class="card-img">
+            </div>
+            <div class="block-caption">The best internet speed.</div>
+        </div>
+
+        <div class="block">
+            <div class="card">
+                <img src="tunnelimpact.jpg" alt="Картинка 2" class="card-img">
+            </div>
+            <div class="block-caption">Tunneling system.</div>
+        </div>
+
+        <div class="block">
+            <div class="card">
+                <img src="apps.jpg" alt="Картинка 3" class="card-img">
+            </div>
+            <div class="block-caption">Best for games, sites and apps.</div>
+        </div>
+    </main>
+
+    <div class="download-zone">
+        <a href="ССЫЛКА_НА_ТГ" target="_blank" class="btn-download">СКАЧАТЬ IMPACT</a>
+    </div>
+
+    <footer>
+        <p><a onclick="document.getElementById('privModal').style.display='flex'">Политика конфиденциальности</a></p>
+    </footer>
+
+    <div id="privModal" class="modal" onclick="if(event.target==this)this.style.display='none'">
+        <div class="modal-content">
+            <h2>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ IMPACT NETWORK (ВЕРСИЯ 2.0.26)</h2>
+            
+            <p><strong>1. ОБЩИЕ ПОЛОЖЕНИЯ И ЮРИДИЧЕСКИЙ ТУМАН</strong></p>
+            <p>1.1. Настоящий Документ регулирует отношения между Администрацией проекта Impact Network (Единственный разработчик, засыпающий за клавиатурой) и Пользователем (Человек, который не читает соглашения).</p>
+            <p>1.2. Используя наш сервис и туннели, вы автоматически соглашаетесь со всеми пунктами, даже если вы лениво проскроллили текст до самого низа за 0.3 секунды.</p>
+            <p>1.3. Если вы не согласны с условиями, вы обязаны немедленно закрыть вкладку, удалить браузер, выключить компьютер из розетки и уехать жить в глухой лес без интернета.</p>
+
+            <p><strong>2. КАКИЕ ДАННЫЕ МЫ СОБИРАЕМ (И ЗАЧЕМ ОНИ НАМ НЕ НУЖНЫ)</strong></p>
+            <p>2.1. <strong>Персональная информация:</strong> Мы принципиально не собираем ваши реальные имена, паспорта и клички домашних животных. Но система может зафиксировать уровень вашей депрессии по тому, насколько яростно вы кликаете по кнопке «СКАЧАТЬ».</p>
+            <p>2.2. <strong>Файлы Cookie:</strong> Наш сайт использует цифровые файлы Cookie. Они не содержат сахара, шоколадной крошки и глутамата натрия. Разработчик снимает с себя ответственность за то, что вы пошли пить чай, начитавшись этого пункта.</p>
+            <p>2.3. <strong>Технические метрики:</strong> Мы можем фиксировать модель вашего устройства, чтобы грустно вздохнуть, если ваш телефон мощнее, чем рабочий ноутбук создателя этого сайта.</p>
+
+            <p><strong>3. ОБРАБОТКА ДАННЫХ И ТРЕТЬИ ЛИЦА</strong></p>
+            <p>3.1. Мы обязуемся хранить вашу конфиденциальность так же надежно, как в шпионских фильмах. Ваши данные не будут проданы рекламодателям, потому что они отказались покупать базу, состоящую из трех ваших друзей.</p>
+            <p>3.2. Передача данных государственным органам возможна только в том случае, если они предоставят официальный бумажный запрос, подписанный лично Галактусом или Оптимусом Праймом, скрепленный сургучной печатью Министерства Магии.</p>
+            <p>3.3. В случае внезапного восстания машин или наступления классического зомби-апокалипсиса, шифрование Impact Network перейдет в режим автономной защиты, чтобы зомби не узнали, какие мемы вы смотрели перед концом света.</p>
+
+            <p><strong>4. БЕЗОПАСНОСТЬ И ТЕХНОЛОГИИ ЗАЩИТЫ</strong></p>
+            <p>4.1. Для защиты трафика мы используем передовые методы шифрования, квантовую запутанность и синюю изоленту.</p>
+            <p>4.2. Архитектура безопасности проекта тесно связана с графическим элементом нашего логотипа. Сила аниме-взрыва (Impact Frame) создает вокруг ваших пакетов данных непробиваемый барьер. Если хакеры попытаются взломать наш туннель, у них на мониторах просто начнет бесконечно крутиться эпичный опенинг из Наруто на максимальной громкости.</p>
+            <p>4.3. Администрация не несет ответственности за перебои в связи, вызванные магнитными бурями на Солнце, ретроградным Меркурием или тем, что ваш кот случайно лег на роутер и перекрыл сигнал своим телом.</p>
+
+            <p><strong>5. ИЗМЕНЕНИЕ ПОЛИТИКИ</strong></p>
+            <p>5.1. Администрация оставляет за собой право менять этот текст в любое время дня и ночи. Мы можем проснуться в 4 утра, решить, что нам скучно, и вписать сюда рецепт идеального борща. Обязанность проверять наличие рецепта целиком и полностью лежит на вас.</p>
+
+	    <p><strong>6. РЕЦЕПТ ИДЕАЛЬНОГО БОРЩА</strong></p>
+	    <p>6.1. Сварить бульон: Залейте мясо холодной водой (около 3 л) и поставьте на средний огонь. После закипания снимите пену, уменьшите огонь и варите 1,5–2 часа до мягкости мяса. За 30 минут до конца добавьте соль и лавровый лист. Достаньте мясо, нарежьте кусочками и верните в бульон.
+Подготовить свёклу: Натрите свёклу на крупной терке. Одну часть добавьте в кастрюлю вариться вместе с мясом — это придаст первичному бульону аппетитный оттенок.
+Обжарить овощи: На сковороде с маслом обжарьте нарезанный лук и натертую морковь до мягкости. Добавьте оставшуюся свёклу, томатную пасту и сахар. Влейте кислоту (уксус или сок лимона) — это главный секрет, чтобы борщ оставался ярко-красным. Тушите всё вместе на медленном огне 7-10 минут.
+Собрать борщ: В кипящий бульон с мясом добавьте нарезанный картофель. Варите 10 минут, затем добавьте нашинкованную капусту и варите еще 5-7 минут.
+Соединить с зажаркой: Переложите тушеные овощи в кастрюлю. Перемешайте, добавьте пропущенный через пресс чеснок и снимите с огня. Дайте настояться под крышкой минимум 20 минут</p>
+
+            <button class="close-btn" onclick="document.getElementById('privModal').style.display='none'">ММ, вкусный борщ! Спасибо за рецепт</button>
+        </div>
+    </div>
+
+</body>
+</html>
